@@ -1,3 +1,69 @@
+import styled from "styled-components";
+import LogoPic from "../../assets/img/argentBankLogo.png";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+
 export default function Header() {
-	return <div>Header</div>;
+	return (
+		<TopNav>
+			<Logo>
+				<img src={LogoPic} alt="Argent Bank Logo" />
+			</Logo>
+			<Menu>
+				<a className="item" href="./sign-in.html">
+					<Icon icon={faUserCircle} />
+					Sign In
+				</a>
+			</Menu>
+		</TopNav>
+	);
 }
+
+/**
+ * Styles
+ */
+
+const TopNav = styled.nav`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 5px 20px;
+
+	a {
+		font-weight: bold;
+		color: #2c3e50;
+	}
+
+	img {
+		max-width: 100%;
+		width: 200px;
+	}
+`;
+
+const Logo = styled.a`
+	display: flex;
+	align-items: center;
+`;
+
+const Menu = styled.div`
+	text-decoration: none;
+	margin-right: 0.5rem;
+
+	:hover {
+		text-decoration: underline;
+	}
+
+	.item {
+		text-decoration: none;
+		margin-right: 0.5rem;
+
+		:hover {
+			text-decoration: underline;
+		}
+	}
+`;
+
+const Icon = styled(FontAwesomeIcon)`
+	text-decoration: none;
+	margin-right: 0.5rem;
+`;
