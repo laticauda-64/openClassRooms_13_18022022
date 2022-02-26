@@ -43,7 +43,7 @@ const HeroSection = styled.section`
 const Content = styled.div`
 	position: relative;
 	top: 2rem;
-	width: 200px;
+	width: 264px;
 	background: white;
 	padding: 2rem;
 	text-align: left;

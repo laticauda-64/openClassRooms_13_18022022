@@ -2,18 +2,21 @@ import styled from "styled-components";
 import LogoPic from "../../assets/img/argentBankLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { Link } from "react-router-dom";
 
 export default function Header() {
 	return (
 		<TopNav>
 			<Logo>
-				<img src={LogoPic} alt="Argent Bank Logo" />
+				<Link to={"/"}>
+					<img src={LogoPic} alt="Argent Bank Logo" />
+				</Link>
 			</Logo>
 			<Menu>
-				<a className="item" href="./sign-in.html">
+				<Link className="item" to="/login">
 					<Icon icon={faUserCircle} />
 					Sign In
-				</a>
+				</Link>
 			</Menu>
 		</TopNav>
 	);
