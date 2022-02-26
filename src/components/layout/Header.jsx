@@ -7,10 +7,8 @@ import { Link } from "react-router-dom";
 export default function Header() {
 	return (
 		<TopNav>
-			<Logo>
-				<Link to={"/"}>
-					<img src={LogoPic} alt="Argent Bank Logo" />
-				</Link>
+			<Logo to="/">
+				<img src={LogoPic} alt="Argent Bank Logo" />
 			</Logo>
 			<Menu>
 				<Link className="item" to="/login">
@@ -43,7 +41,7 @@ const TopNav = styled.nav`
 	}
 `;
 
-const Logo = styled.a`
+const Logo = styled(Link)`
 	display: flex;
 	align-items: center;
 `;
