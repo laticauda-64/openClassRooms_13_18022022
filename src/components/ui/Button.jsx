@@ -1,21 +1,21 @@
-import React from "react";
 import styled from "styled-components";
 
-export default function Button({ content }) {
-	return <GreenButton>{content}</GreenButton>;
+export default function Button({ content, type }) {
+	return <GreenButton type={type}>{content}</GreenButton>;
 }
 
 const GreenButton = styled.button`
 	display: block;
-	width: 100%;
+	width: ${(props) => (props.type === "small" ? "auto" : "100%")};
 	padding: 8px;
-	font-size: 1.1rem;
+	font-size: ${(props) => (props.type === "small" ? "0.9rem" : "1.1rem")};
 	font-weight: bold;
 	margin-top: 1rem;
-	border: none;
-	text-decoration: underline;
+	border: ${(props) => (props.type === "small" ? "" : "none")};
+	text-decoration: ${(props) => (props.type === "small" ? "none" : "underline")};
 	cursor: pointer;
 	border-color: #00bc77;
 	background-color: #00bc77;
 	color: #fff;
+	margin: 0 auto;
 `;
