@@ -1,17 +1,12 @@
 import styled from "styled-components";
-import Button from "../components/ui/Button";
 import Account from "../components/ui/Account";
+import UserInfo from "../components/ui/UserInfo";
 
 export default function Dashboard() {
 	return (
 		<Main>
 			<TopSection>
-				<h1>
-					Welcome back
-					<br />
-					Tony Jarvis!
-				</h1>
-				<Button content="Edit Name" type="small" />
+				<UserInfo firstname="Tony" lastname="Jarvis" />
 			</TopSection>
 			<Account reference="Argent Bank Checking (x8349)" amount="$2,082.79" status="Available Balance" />
 			<Account reference="Argent Bank Savings (x6712)" amount="$10,928.42" status="Available Balance" />
