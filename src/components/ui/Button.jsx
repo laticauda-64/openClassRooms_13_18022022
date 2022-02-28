@@ -1,7 +1,11 @@
 import styled from "styled-components";
 
-export default function Button({ content, type }) {
-	return <GreenButton type={type}>{content}</GreenButton>;
+export default function Button({ content, type, func }) {
+	return (
+		<GreenButton type={type} onClick={func}>
+			{content}
+		</GreenButton>
+	);
 }
 
 const GreenButton = styled.button`

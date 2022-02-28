@@ -1,20 +1,36 @@
 import styled from "styled-components";
 import LogoPic from "../../assets/img/argentBankLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
+import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
+import { useSelector } from "react-redux";
 
 export default function Header() {
+	const user = useSelector((state) => state.auth.firstName);
+
 	return (
 		<TopNav>
 			<Logo to="/">
 				<img src={LogoPic} alt="Argent Bank Logo" />
 			</Logo>
 			<Menu>
-				<Link className="item" to="/login">
-					<Icon icon={faUserCircle} />
-					Sign In
-				</Link>
+				{!user ? (
+					<Link className="item" to="/login">
+						<Icon icon={faUserCircle} />
+						Sign In
+					</Link>
+				) : (
+					<>
+						<Link className="item" to="/dashboard">
+							<Icon icon={faUserCircle} />
+							{user}
+						</Link>
+						<Link className="item" to="/logout">
+							<Icon icon={faSignOutAlt} />
+							Sign Out
+						</Link>
+					</>
+				)}
 			</Menu>
 		</TopNav>
 	);
