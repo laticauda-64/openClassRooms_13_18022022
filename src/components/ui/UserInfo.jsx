@@ -6,7 +6,6 @@ import { goTest } from "../../store/auth/authSlice.js";
 export default function UserInfo({ firstname, lastname }) {
 	const email = useSelector((state) => state.auth.email);
 	const dispatch = useDispatch();
-	console.log(goTest);
 	return (
 		<>
 			<h1>

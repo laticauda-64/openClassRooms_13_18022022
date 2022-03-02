@@ -2,8 +2,20 @@ import styled from "styled-components";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import GreenButton from "../components/ui/Button";
+import { useState } from "react";
+import { logUser } from "../store/auth/authSlice";
+import { useDispatch } from "react-redux";
 
 export default function Login() {
+	/**
+	 * States
+	 */
+	const [email, setEmail] = useState("john@stark.com");
+	const [password, setPassword] = useState("password123");
+	const [isChecked, setIsChecked] = useState(false);
+
+	const dispatch = useDispatch();
+
 	return (
 		<Main>
 			<LoginModal>
@@ -12,17 +24,23 @@ export default function Login() {
 				<form>
 					<div className="input-wrapper">
 						<label htmlFor="username">Username</label>
-						<input type="text" id="username" />
+						<input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
 					</div>
 					<div className="input-wrapper">
 						<label htmlFor="password">Password</label>
-						<input type="password" id="password" />
+						<input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
 					</div>
 					<div className="input-remember">
-						<input type="checkbox" id="remember-me" />
+						<input type="checkbox" id="remember-me" checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)} />
 						<label htmlFor="remember-me">Remember me</label>
 					</div>
-					<GreenButton content="Sign In" />
+					<GreenButton
+						content="Sign In"
+						func={(e) => {
+							e.preventDefault();
+							dispatch(logUser({ email: email, password: password }));
+						}}
+					/>
 				</form>
 			</LoginModal>
 		</Main>

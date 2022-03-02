@@ -1,13 +1,26 @@
-import { Outlet } from "react-router-dom";
-import Footer from "./components/layout/Footer";
-import Header from "./components/layout/Header";
+import { Routes, Route, Navigate } from "react-router-dom";
+import Layout from "./components/layout/Layout";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Dashboard from "./pages/Dashboard";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
 export const App = () => {
+	const isAuth = useSelector((state) => state.auth.isConnected);
+
 	return (
-		<>
-			<Header />
-			<Outlet />
-			<Footer />
-		</>
+		<Routes>
+			<Route path="/" element={<Layout />}>
+				<Route index element={<Home />} />
+				<Route path="login" element={<Login />} />
+				{isAuth && (
+					<>
+						<Route path="dashboard" element={<Dashboard />} />
+					</>
+				)}
+				<Route path="*" element={<Navigate to={isAuth ? "dashboard" : "/"} />} />
+			</Route>
+		</Routes>
 	);
 };
