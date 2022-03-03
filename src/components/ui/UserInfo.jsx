@@ -39,7 +39,13 @@ export default function UserInfo() {
 						</div>
 						<div className="input-wrapper right">
 							<input type="text" id="lastname" defaultValue={lastName} ref={lastNameRef} />
-							<button>Cancel</button>
+							<button
+								onClick={(e) => {
+									e.preventDefault();
+									setIsEditing(false);
+								}}>
+								Cancel
+							</button>
 						</div>
 					</EditForm>
 					<br />
@@ -92,6 +98,14 @@ const EditForm = styled.form`
 		padding-right: 5px;
 		button {
 			align-self: end;
+		}
+	}
+	@media (max-width: 920px) {
+		.input-wrapper {
+			input {
+				font-size: 18px;
+				width: 170px;
+			}
 		}
 	}
 `;

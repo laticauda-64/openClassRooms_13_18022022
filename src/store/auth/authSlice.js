@@ -80,7 +80,7 @@ export const authSlice = createSlice({
 			state.lastName = lastName;
 		},
 		[getUserInfo.rejected]: (state, { payload }) => {
-			state.status = payload;
+			return initialStore;
 		},
 		[editUserInfo.fulfilled]: (state, { payload }) => {
 			const { firstName, lastName } = payload.data.body;

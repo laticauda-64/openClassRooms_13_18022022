@@ -26,7 +26,7 @@ export default function Header() {
 						</Link>
 						<Link className="item" to="/user/logout">
 							<Icon icon={faSignOutAlt} />
-							Sign Out
+							<i className="signOutText">Sign Out</i>
 						</Link>
 					</>
 				)}
@@ -75,6 +75,15 @@ const Menu = styled.div`
 
 		:hover {
 			text-decoration: underline;
+		}
+	}
+	.signOutText {
+		font-style: normal;
+	}
+
+	@media (max-width: 920px) {
+		.signOutText {
+			display: none;
 		}
 	}
 `;
