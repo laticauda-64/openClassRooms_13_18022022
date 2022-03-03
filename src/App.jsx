@@ -13,14 +13,14 @@ export const App = () => {
 		<Routes>
 			<Route path="/" element={<Layout />}>
 				<Route index element={<Home />} />
-				<Route path="login" element={isAuth ? <Navigate to={"dashboard"} /> : <Login />} />
+				<Route path="user/login" element={isAuth ? <Navigate to={"user/profile"} /> : <Login />} />
 				{isAuth && (
 					<>
-						<Route path="dashboard" element={<Dashboard />} />
+						<Route path="user/profile" element={<Dashboard />} />
 					</>
 				)}
-				<Route path="logout" element={<Logout />} />
-				<Route path="*" element={<Navigate to={isAuth ? "dashboard" : "/"} />} />
+				<Route path="user/logout" element={<Logout />} />
+				<Route path="*" element={<Navigate to={isAuth ? "user/profile" : "/"} />} />
 			</Route>
 		</Routes>
 	);

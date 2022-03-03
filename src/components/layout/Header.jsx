@@ -16,17 +16,17 @@ export default function Header() {
 			</Logo>
 			<Menu>
 				{!user ? (
-					<Link className="item" to="/login">
+					<Link className="item" to="/user/login">
 						<Icon icon={faUserCircle} />
 						Sign In
 					</Link>
 				) : (
 					<>
-						<Link className="item" to="/dashboard">
+						<Link className="item" to="/user/profile">
 							<Icon icon={faUserCircle} />
 							{user}
 						</Link>
-						<Link className="item" to="/logout">
+						<Link className="item" to="/user/logout">
 							<Icon icon={faSignOutAlt} />
 							Sign Out
 						</Link>
