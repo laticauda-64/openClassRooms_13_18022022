@@ -3,11 +3,12 @@ import LogoPic from "../../assets/img/argentBankLogo.png";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle, faSignOutAlt } from "@fortawesome/free-solid-svg-icons";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { purgeStore } from "../../store/auth/authSlice";
+import { useSelector, useDispatch } from "react-redux";
 
 export default function Header() {
 	const user = useSelector((state) => state.auth.firstName);
-
+	const dispatch = useDispatch();
 	return (
 		<TopNav>
 			<Logo to="/">

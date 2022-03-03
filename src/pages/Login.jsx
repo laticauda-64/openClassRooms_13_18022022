@@ -1,10 +1,11 @@
 import styled from "styled-components";
+import { useNavigate } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserCircle } from "@fortawesome/free-solid-svg-icons";
 import GreenButton from "../components/ui/Button";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { logUser } from "../store/auth/authSlice";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 export default function Login() {
 	/**
@@ -14,7 +15,35 @@ export default function Login() {
 	const [password, setPassword] = useState("password123");
 	const [isChecked, setIsChecked] = useState(false);
 
+	/**
+	 * Store
+	 */
+	const isConnected = useSelector((state) => state.auth.isConnected);
+	const isError = useSelector((state) => state.auth?.status?.status === 400);
+	const errorMsg = useSelector((state) => state.auth?.status?.message);
+
 	const dispatch = useDispatch();
+
+	/**
+	 * React Router
+	 */
+	const navigate = useNavigate();
+
+	/**
+	 * UseEffects
+	 */
+	useEffect(() => {
+		if (isConnected) {
+			navigate("/dashboard");
+		}
+	}, [isConnected]);
+
+	/**
+	 * Custom functions
+	 */
+	const removeErrorGlow = (e) => {
+		e.target.classList.remove("field-error");
+	};
 
 	return (
 		<Main>
@@ -24,11 +53,25 @@ export default function Login() {
 				<form>
 					<div className="input-wrapper">
 						<label htmlFor="username">Username</label>
-						<input type="text" id="username" value={email} onChange={(e) => setEmail(e.target.value)} />
+						<input
+							type="text"
+							id="username"
+							className={isError ? "field-error" : ""}
+							value={email}
+							onChange={(e) => setEmail(e.target.value)}
+							onFocus={removeErrorGlow}
+						/>
 					</div>
 					<div className="input-wrapper">
 						<label htmlFor="password">Password</label>
-						<input type="password" id="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+						<input
+							type="password"
+							id="password"
+							value={password}
+							className={isError ? "field-error" : ""}
+							onChange={(e) => setPassword(e.target.value)}
+							onFocus={removeErrorGlow}
+						/>
 					</div>
 					<div className="input-remember">
 						<input type="checkbox" id="remember-me" checked={isChecked} onChange={(e) => setIsChecked(e.target.checked)} />
@@ -41,6 +84,7 @@ export default function Login() {
 							dispatch(logUser({ email: email, password: password }));
 						}}
 					/>
+					{isError && <ErrorMessage>{errorMsg}</ErrorMessage>}
 				</form>
 			</LoginModal>
 		</Main>
@@ -87,6 +131,33 @@ const LoginModal = styled.section`
 		padding: 5px;
 		font-size: 1.2rem;
 	}
+
+	.field-error {
+		border: 1px solid red;
+		background: #ff000024;
+		box-shadow: 0 0 0.5em red;
+		animation: shake 0.2s ease-in-out 0s 2;
+	}
+
+	@keyframes shake {
+		0% {
+			margin-left: 0rem;
+		}
+		25% {
+			margin-left: 0.5rem;
+		}
+		75% {
+			margin-left: -0.5rem;
+		}
+		100% {
+			margin-left: 0rem;
+		}
+	}
+`;
+
+const ErrorMessage = styled.p`
+	margin-top: 15px;
+	color: red;
 `;
 
 const Icon = styled(FontAwesomeIcon)`

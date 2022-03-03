@@ -2,8 +2,8 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import Layout from "./components/layout/Layout";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
+import Logout from "./pages/Logout";
 import Dashboard from "./pages/Dashboard";
-import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 
 export const App = () => {
@@ -13,12 +13,13 @@ export const App = () => {
 		<Routes>
 			<Route path="/" element={<Layout />}>
 				<Route index element={<Home />} />
-				<Route path="login" element={<Login />} />
+				<Route path="login" element={isAuth ? <Navigate to={"dashboard"} /> : <Login />} />
 				{isAuth && (
 					<>
 						<Route path="dashboard" element={<Dashboard />} />
 					</>
 				)}
+				<Route path="logout" element={<Logout />} />
 				<Route path="*" element={<Navigate to={isAuth ? "dashboard" : "/"} />} />
 			</Route>
 		</Routes>
