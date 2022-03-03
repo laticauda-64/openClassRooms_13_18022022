@@ -72,9 +72,7 @@ export const authSlice = createSlice({
 		},
 		[logUser.rejected]: (state, { payload }) => {
 			state.status = payload;
-			console.log(payload);
 		},
-		[getUserInfo.pending]: (state, { payload }) => {},
 		[getUserInfo.fulfilled]: (state, { payload }) => {
 			const { email, firstName, lastName } = payload.data.body;
 			state.email = email;
@@ -83,9 +81,7 @@ export const authSlice = createSlice({
 		},
 		[getUserInfo.rejected]: (state, { payload }) => {
 			state.status = payload;
-			console.log(payload);
 		},
-		[editUserInfo.pending]: (state, { payload }) => {},
 		[editUserInfo.fulfilled]: (state, { payload }) => {
 			const { firstName, lastName } = payload.data.body;
 			state.firstName = firstName;
@@ -93,7 +89,6 @@ export const authSlice = createSlice({
 		},
 		[editUserInfo.rejected]: (state, { payload }) => {
 			state.status = payload;
-			console.log(payload);
 		},
 	},
 });
